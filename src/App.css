@@ -1,0 +1,111 @@
+/* General styles */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.app {
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid white;
+}
+
+.header nav a {
+  color: white;
+  margin-left: 20px;
+  text-decoration: none;
+}
+
+/* Form Container */
+.form-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.form-container h1 {
+  font-size: 48px;
+  margin-bottom: 30px;
+}
+
+/* Inputs */
+form input {
+  display: block;
+  width: 100%;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid white;
+  color: white;
+  font-size: 16px;
+}
+
+form input:focus {
+  outline: none;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Messages */
+.error {
+  color: red;
+  margin: 10px 0;
+}
+
+.success {
+  color: green;
+  margin: 10px 0;
+}
+
+/* Button */
+form button {
+  background: white;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+form button:hover {
+  opacity: 0.9;
+}
+
+/* Profile Page */
+.profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  padding: 20px;
+}
+
+.profile-container h1 {
+  font-size: 40px;
+  margin-bottom: 40px;
+}
+
+.profile-field {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+/* Logout button */
+.logout-btn {
+  background: white;
+  color: black;
+  border: none;
+  padding: 10px 30px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.logout-btn:hover {
+  opacity: 0.9;
+}
