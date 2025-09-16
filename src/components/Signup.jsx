@@ -1,93 +1,58 @@
-import React, { useState, useRef } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../state/userSlice";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  const [form, setForm] = useState({ name: "", email: "", password: "", confirmPassword: "" });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
   const user = useSelector((state) => state.user.user);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const [error, setError] = useState(false);
-  const [passwordMismatchError, setPasswordMismatchError] = useState(false);
-  const [success, setSuccess] = useState(false);
-
-  const name = useRef();
-  const email = useRef();
-  const password = useRef();
-  const confirmPassword = useRef();
-
-  if (user) {
-    navigate("/profile");
-  }
+  useEffect(() => {
+    if (user?.token) {
+      navigate("/profile");
+    }
+  }, [user, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setError(false);
-    setPasswordMismatchError(false);
-    setSuccess(false);
-
-    if (
-      !name.current.value ||
-      !email.current.value ||
-      !password.current.value ||
-      !confirmPassword.current.value
-    ) {
-      setError(true);
+    if (!form.name || !form.email || !form.password || !form.confirmPassword) {
+      setError("All fields are required!");
+      return;
+    }
+    if (form.password !== form.confirmPassword) {
+      setError("Passwords do not match!");
       return;
     }
 
-    if (password.current.value !== confirmPassword.current.value) {
-      setPasswordMismatchError(true);
-      return;
-    }
+    const token = Math.random().toString(36).substring(2);
 
-    const newUser = {
-      name: name.current.value,
-      email: email.current.value,
-      password: password.current.value,
-    };
-
+    const newUser = { ...form, token };
     dispatch(setUser(newUser));
-    setSuccess(true);
-    navigate("/profile");
+    setError("");
+    setSuccess("Signup successful! Redirecting...");
+    
+    setTimeout(() => {
+      navigate("/profile");
+    }, 1500);
   };
 
   return (
-    <div className="app">
-      <header className="header">
-        <div>Header</div>
-        <nav>
-          <Link to="/signup">Signup</Link>
-          <Link to="/profile">Profile</Link>
-        </nav>
-      </header>
-
-      <div className="form-container">
-        <h1>Signup</h1>
-        <form onSubmit={handleSubmit}>
-          <input type="text" placeholder="Full Name" ref={name} />
-          <input type="email" placeholder="Email" ref={email} />
-          <input type="password" placeholder="Password" ref={password} />
-          <input
-            type="password"
-            placeholder="Confirm Password"
-            ref={confirmPassword}
-          />
-
-          {error && (
-            <p className="error">Error : All the fields are mandatory</p>
-          )}
-          {passwordMismatchError && (
-            <p className="error">
-              Error : Password and Confirm Password Mismatched
-            </p>
-          )}
-          {success && <p className="success">Successfully Signed Up!</p>}
-
-          <button type="submit">Signup</button>
-        </form>
-      </div>
+    <div className="form-container">
+      <h2>Signup</h2>
+      {error && <p className="error">{error}</p>}
+      {success && <p className="success">{success}</p>}
+      <form onSubmit={handleSubmit}>
+        <input type="text" placeholder="Name" onChange={(e) => setForm({ ...form, name: e.target.value })} />
+        <input type="email" placeholder="Email" onChange={(e) => setForm({ ...form, email: e.target.value })} />
+        <input type="password" placeholder="Password" onChange={(e) => setForm({ ...form, password: e.target.value })} />
+        <input type="password" placeholder="Confirm Password" onChange={(e) => setForm({ ...form, confirmPassword: e.target.value })} />
+        <button type="submit">Signup</button>
+      </form>
     </div>
   );
 };

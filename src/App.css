@@ -1,4 +1,3 @@
-/* General styles */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -10,7 +9,6 @@ body {
   min-height: 100vh;
 }
 
-/* Header */
 .header {
   display: flex;
   justify-content: space-between;
@@ -24,7 +22,6 @@ body {
   text-decoration: none;
 }
 
-/* Form Container */
 .form-container {
   max-width: 600px;
   margin: 60px auto;
@@ -36,7 +33,6 @@ body {
   margin-bottom: 30px;
 }
 
-/* Inputs */
 form input {
   display: block;
   width: 100%;
@@ -54,18 +50,19 @@ form input:focus {
   border-bottom: 1px solid #ccc;
 }
 
-/* Messages */
 .error {
   color: red;
-  margin: 10px 0;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
 .success {
   color: green;
-  margin: 10px 0;
+  font-weight: bold;
+  margin-bottom: 10px;
 }
 
-/* Button */
+
 form button {
   background: white;
   color: black;
@@ -79,7 +76,6 @@ form button:hover {
   opacity: 0.9;
 }
 
-/* Profile Page */
 .profile-container {
   max-width: 600px;
   margin: 60px auto;
@@ -96,7 +92,6 @@ form button:hover {
   margin-bottom: 25px;
 }
 
-/* Logout button */
 .logout-btn {
   background: white;
   color: black;
